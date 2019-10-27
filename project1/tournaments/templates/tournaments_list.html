@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block body %}
+<a href="{% url 'tournaments:create' %}">Новый турнир</a>
+<ul>
+{% for tour in tournaments %}
+<li>
+{{ tour.name }}
+{{ tour.date }}
+<a href="{% url 'tournaments:info' pk=tour.pk%}">Редактировать</a>
+</li>
+{% endfor %}
+</ul>
+{% endblock %}
