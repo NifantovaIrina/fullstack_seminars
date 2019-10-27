@@ -9,6 +9,8 @@ from tournaments.models import Tournament
 
 def list_tournaments(request):
     tournaments = Tournament.objects.all()
+    for tournament in tournaments:
+        print(tournament.battle)
     # Все шаблоны - в директории templates.
     return render(request, 'tournaments_list.html', {'tournaments': tournaments})
 
