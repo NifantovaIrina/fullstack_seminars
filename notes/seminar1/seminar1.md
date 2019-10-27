@@ -56,6 +56,7 @@ python manage.py runserver
 1. project1_basics в данном репозитории - пример простого проекта с одним приложением tournaments и одной моделью Tournament (в коде есть совсем немного комментариев). Приложение позволяет создавать и редактировать турниры, получать их список
 2. Части 1-4 туториала
 https://docs.djangoproject.com/en/2.2/intro/tutorial01/
+3. Про валидацию DateField и DateTimeField (в каком формате писать эти данные в форму) -  https://docs.djangoproject.com/en/2.1/ref/settings/#date-input-formats
 3. Про работу с формами - https://docs.djangoproject.com/en/2.2/topics/forms/ (в проекте есть одна простейшая форма)
 4. ModelForms - формы на основе моделей - https://docs.djangoproject.com/en/2.2/topics/forms/modelforms/
 5. django templates: синтаксис -  https://docs.djangoproject.com/en/2.2/topics/templates/, переиспользование шаблонов - https://tutorial.djangogirls.org/en/template_extending/ Учитывая что в проекте фронт будет сделан на React, шаблоны особо не понадобятся, но могут быть удобны, например, если приложение будет отправлять пользователям письма - все виды писем можно будет отнаследовать от одного шаблона. В project1 все шаблоны переиспользуют base.html, заменяя блок body на свой собственный.
