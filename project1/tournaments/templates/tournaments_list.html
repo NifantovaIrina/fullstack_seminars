@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block body %}
 <a href="{% url 'tournaments:create' %}">Новый турнир</a>
+<a href="{% url 'battles:create' %}">Новое сражение</a>
 <ul>
 {% for tour in tournaments %}
 <li>

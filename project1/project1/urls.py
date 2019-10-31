@@ -22,5 +22,6 @@ from tournaments.views import main
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path('', main, name='main'),
-    path('tournaments/', include('tournaments.urls', namespace='tournaments'))
+    path('tournaments/', include('tournaments.urls', namespace='tournaments')),
+    path('battles/', include('battles.urls', namespace='battles'))
 ]
