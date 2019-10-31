@@ -7,6 +7,9 @@
 <li>
 {{ tour.name }}
 {{ tour.date }}
+    {% for battle in tour.battle_set.all %}
+    {{ battle.name }}
+    {% endfor %}
 <a href="{% url 'tournaments:info' pk=tour.pk%}">Редактировать</a>
 </li>
 {% endfor %}

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import datetime
+
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from battles.forms import BattleForm
@@ -71,7 +73,10 @@ def tournament_info(request, pk):
 
 
 def add_battle(request, pk, battle_pk):
-    pass
+    tournament = Tournament.objects.get(pk=pk)
+    battle = Battle.objects.get(pk=battle_pk)
+    tournament.battle_set.add(battle)
+    return HttpResponse("Success")
 
 
 def create_battle(request, pk):
