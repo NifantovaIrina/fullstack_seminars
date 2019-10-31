@@ -4,3 +4,5 @@ project1/project1/__pycache__/
 project1/.idea/
 project1/tournaments/__pycache__/
 project1/tournaments/migrations/
+project1/battles/__pycache__/
+project1/battles/migrations/

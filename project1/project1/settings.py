@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Не забыть добавить сюда приложения, которые создаем сами
-    'tournaments'
+    'tournaments',
+    'battles'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'project1.urls'
+AUTH_USER_MODEL = 'auth.User'
 
 TEMPLATES = [
     {

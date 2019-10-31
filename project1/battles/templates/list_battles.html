@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block body %}
+<a href="{% url 'battles:create' %}">Новая игра</a>
+<ul>
+{% for battle in battles %}
+<li>
+{{ battle.name }}
+</li>
+{% endfor %}
+</ul>
+{% endblock %}
