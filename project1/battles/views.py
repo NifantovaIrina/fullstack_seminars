@@ -15,11 +15,12 @@ def create_battle(request):
         form = BattleForm(request.POST)
         if form.is_valid():
             print("form data ", form.cleaned_data)
+            battle = Battle(name=form.cleaned_data['name'])
             if form.cleaned_data['tournament'] is not None:
-                battle = Battle(name=form.cleaned_data['name'], tournament=form.cleaned_data['tournament'])
-            else:
-                battle = Battle(name=form.cleaned_data['name'])
+                battle.tournament = form.cleaned_data['tournament']
             battle.save()
+            if form.cleaned_data['participants'] is not None:
+                battle.participants.set(form.cleaned_data['participants'])
             return redirect('/battles/')
         # if a GET (or any other method) we'll create a blank form
     else:

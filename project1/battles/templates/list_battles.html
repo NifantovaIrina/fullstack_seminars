@@ -5,6 +5,9 @@
 {% for battle in battles %}
 <li>
 {{ battle.name }}
+    {% for user in battle.participants.all %}
+    {{ user.username }}
+    {% endfor %}
 </li>
 {% endfor %}
 </ul>
