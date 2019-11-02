@@ -22,7 +22,7 @@ def create_battle(request):
             if form.cleaned_data['participants'] is not None:
                 battle.participants.set(form.cleaned_data['participants'])
             return redirect('/battles/')
-        # if a GET (or any other method) we'll create a blank form
+    # if a GET (or any other method) we'll create a blank form
     else:
         form = BattleForm()
 

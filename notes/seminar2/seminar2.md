@@ -6,6 +6,10 @@ https://docs.djangoproject.com/en/2.2/topics/db/examples/many_to_one/
 ### ManyToMany
 https://docs.djangoproject.com/en/2.2/topics/db/examples/many_to_many/
 
+
+Про запросы к базе через ORM
+https://docs.djangoproject.com/en/2.2/topics/db/queries/
+
 Если у одной модели Model1 есть отношение ForeignKey или ManyToMany на Model2, то из инстанса Model2 можно получить связанные объекты типа Model1 с помощью RelatedManager https://docs.djangoproject.com/en/2.2/ref/models/relations/
 
 ## Админка django ##
@@ -16,9 +20,3 @@ https://docs.djangoproject.com/en/2.2/ref/contrib/admin/
 admin.site.register(ModelName)
 ```
 в файле admin.py приложения, содержащего эту модель.
-## REST framework ##
-### Принцип REST ###
-### CORS headers ###
-от чего защищаемся
-как защищаемся
-ставим
