@@ -6,5 +6,6 @@ from django.contrib.auth.models import User
 
 class Battle(models.Model):
     name = models.CharField(max_length=400)
-    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, blank=True, null=True)
-    participants = models.ManyToManyField(User, limit_choices_to=2)
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE,
+                                   blank=True, null=True)
+    participants = models.ManyToManyField(User)
