@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
+from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
@@ -11,9 +12,6 @@ from battles.serializers import BattleSerializer
 class BattleViewSet(viewsets.ModelViewSet):
     queryset = Battle.objects.all()
     serializer_class = BattleSerializer
-
-
-
 
 #
 # class BattleViewSet(viewsets.ViewSet):
