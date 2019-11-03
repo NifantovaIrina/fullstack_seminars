@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     # Не забыть добавить сюда приложения, которые создаем сами
     'tournaments',
     'battles',
-    'corsheaders'
+    'corsheaders',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
