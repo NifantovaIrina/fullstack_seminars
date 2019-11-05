@@ -5,8 +5,9 @@ import datetime
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
-from rest_framework.decorators import api_view, action
+from rest_framework.decorators import api_view, action, permission_classes
 from rest_framework.generics import get_object_or_404
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from battles.forms import BattleForm
@@ -22,6 +23,7 @@ class TournamentViewSet(viewsets.ModelViewSet):
 
     @action(methods=['put'], detail=True)
     def battle(self, request, pk=None):
+        print(request.user)
         tournament = get_object_or_404(queryset=self.queryset,
                                        pk=pk)
         battle = Battle.objects.get(pk=request.POST['battle_pk'])
@@ -30,5 +32,8 @@ class TournamentViewSet(viewsets.ModelViewSet):
 
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def main(request):
+    print(type(request.user))
+    print(request.user.username)
     return Response({"Pong"})
