@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import get_object_or_404
+from rest_framework.permissions import AllowAny, BasePermission
 from rest_framework.response import Response
 
 from battles.forms import BattleForm
@@ -9,32 +11,39 @@ from battles.models import Battle
 from battles.serializers import BattleSerializer
 
 
+class OwnerOrAdminPermission(BasePermission):
+    def has_permission(self, request, view):
+        print(view.action)
+        print(request.method)
+        print(request.user)
+        print(request.user.is_staff)
+        # raise PermissionDenied
+        return True
+
+    def has_object_permission(self, request, view, obj):
+        print("check object permission")
+        if request.user.is_staff or request.user in obj.participants.all():
+            return True
+        raise PermissionDenied
+
+
 class BattleViewSet(viewsets.ModelViewSet):
     queryset = Battle.objects.all()
     serializer_class = BattleSerializer
+    permission_classes = [OwnerOrAdminPermission]
 
-#
-# class BattleViewSet(viewsets.ViewSet):
-#     def list(self, request):
-#         queryset = Battle.objects.all()
-#         serializer = BattleSerializer(queryset, many=True)
-#         return Response(serializer.data)
-#
-#     def retrieve(self, request, pk=None):
-#         queryset = Battle.objects.all()
-#         battle = get_object_or_404(queryset, pk=pk)
-#         serializer = BattleSerializer(battle)
-#         return Response(serializer.data)
-#
-#     def update(self, request, pk=None):
-#          pass
-#
-#     def create(self, request):
-#         serializer = BattleSerializer(data=request.data)
-#         if serializer.is_valid():
-#             battle = serializer.create(serializer.validated_data)
-#             new_serializer = BattleSerializer(battle)
-#             return Response(new_serializer.data)
-#         else:
-#             print(serializer.errors)
-#         return Response("woof")
+    def get_object(self):
+        print("my get_object called")
+        obj = get_object_or_404(self.get_queryset(), pk=self.kwargs["pk"])
+        print("")
+        self.check_object_permissions(self.request, obj)
+        return obj
+
+    def get_queryset(self):
+        print("my get_queryset_called")
+        print(self.request.user)
+        return Battle.objects.filter(participants=self.request.user)
+
+    # def list(self, request, *args, **kwargs):
+    #     queryset = self.get_queryset()
+    #     return Response(BattleSerializer(queryset, many=True).data)
