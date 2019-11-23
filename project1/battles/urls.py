@@ -1,11 +1,9 @@
 from django.urls import path
+from rest_framework.routers import DefaultRouter
 
-from battles.views import list_battles, create_battle
+from battles.views import BattleViewSet
 
 app_name = 'battles'
-
-urlpatterns = [
-    path('', list_battles, name='list'),
-    # path('<int:pk>/', tournament_info, name='info'),
-    path('create/', create_battle, name='create')
-]
+router = DefaultRouter()
+router.register('', BattleViewSet, basename='battles')
+urlpatterns = router.urls

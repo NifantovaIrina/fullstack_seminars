@@ -1,31 +1,40 @@
 from django.shortcuts import render, redirect
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.generics import get_object_or_404
+from rest_framework.response import Response
 
 from battles.forms import BattleForm
 from battles.models import Battle
+from battles.serializers import BattleSerializer
 
 
-def list_battles(request):
-    battles = Battle.objects.all()
-    # print(battles[0])
-    return render(request, 'list_battles.html', {'battles': battles})
+class BattleViewSet(viewsets.ModelViewSet):
+    queryset = Battle.objects.all()
+    serializer_class = BattleSerializer
 
-
-def create_battle(request):
-    if request.method == 'POST':
-        form = BattleForm(request.POST)
-        if form.is_valid():
-            print("form data ", form.cleaned_data)
-            battle = Battle(name=form.cleaned_data['name'])
-            if form.cleaned_data['tournament'] is not None:
-                battle.tournament = form.cleaned_data['tournament']
-            battle.save()
-            if form.cleaned_data['participants'] is not None:
-                battle.participants.set(form.cleaned_data['participants'])
-            return redirect('/battles/')
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = BattleForm()
-
-    return render(request, 'create_battle.html', {'form': form})
-
-
+#
+# class BattleViewSet(viewsets.ViewSet):
+#     def list(self, request):
+#         queryset = Battle.objects.all()
+#         serializer = BattleSerializer(queryset, many=True)
+#         return Response(serializer.data)
+#
+#     def retrieve(self, request, pk=None):
+#         queryset = Battle.objects.all()
+#         battle = get_object_or_404(queryset, pk=pk)
+#         serializer = BattleSerializer(battle)
+#         return Response(serializer.data)
+#
+#     def update(self, request, pk=None):
+#          pass
+#
+#     def create(self, request):
+#         serializer = BattleSerializer(data=request.data)
+#         if serializer.is_valid():
+#             battle = serializer.create(serializer.validated_data)
+#             new_serializer = BattleSerializer(battle)
+#             return Response(new_serializer.data)
+#         else:
+#             print(serializer.errors)
+#         return Response("woof")
