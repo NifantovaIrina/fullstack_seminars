@@ -20,14 +20,12 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 from tournaments.views import main
 from rest_framework.authtoken import views
-from oauth2_provider import urls
 from rest_framework_jwt import authentication
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path('', main, name='main'),
     path('jwt_auth/', obtain_jwt_token),
     path('auth/', views.obtain_auth_token),
-    path('oauth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     path('tournaments/', include('tournaments.urls', namespace='tournaments')),
     path('battles/', include('battles.urls', namespace='battles'))
 ]
